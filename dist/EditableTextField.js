@@ -31,7 +31,7 @@ var EditableTextField = React.createClass({
         var linkClass = empty ? 'editable-click editable-empty' : 'editable-click';
         var popover = React.createElement(
             Popover,
-            null,
+            {id: 'xeditable_input_popover'},
             React.createElement(
                 'form',
                 { className: 'form-inline', onSubmit: this.submit },
