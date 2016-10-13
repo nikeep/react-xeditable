@@ -113,18 +113,20 @@ var EditableTextField = React.createClass({
     },
 
     processKeyUp: function processKeyUp(evt) {
-        if (evt.keyCode !== 8 && evt.keyCode !== 46) {
-            var value = this.refs.input.value + evt;
-            var oldStart = this.refs.input.selectionStart;
-            var oldEnd = this.refs.input.selectionEnd;
-            var newValue = this.applyMask(value);
-            this.refs.input.value = newValue;
-            if (newValue.indexOf('_') > -1) {
-                this.refs.input.selectionStart = newValue.indexOf('_');
-                this.refs.input.selectionEnd = this.refs.input.selectionStart + (oldEnd - oldStart);
-            } else {
-                this.refs.input.selectionStart = oldStart;
-                this.refs.input.selectionEnd = oldEnd;
+        if (this.props.mask) {
+            if (evt.keyCode !== 8 && evt.keyCode !== 46) {
+                var value = this.refs.input.value;
+                var oldStart = this.refs.input.selectionStart;
+                var oldEnd = this.refs.input.selectionEnd;
+                var newValue = this.applyMask(value);
+                this.refs.input.value = newValue;
+                if (newValue.indexOf('_') > -1) {
+                    this.refs.input.selectionStart = newValue.indexOf('_');
+                    this.refs.input.selectionEnd = this.refs.input.selectionStart + (oldEnd - oldStart);
+                } else {
+                    this.refs.input.selectionStart = oldStart;
+                    this.refs.input.selectionEnd = oldEnd;
+                }
             }
         }
     },
