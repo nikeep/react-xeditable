@@ -5,7 +5,7 @@ var React = require('react');
 var Button = require('react-bootstrap').Button;
 var OverlayTrigger = require('react-bootstrap').OverlayTrigger;
 var Popover = require('react-bootstrap').Popover;
-var Input = require('react-bootstrap').Input;
+// var FormControl = require('react-bootstrap').InputGroup;
 var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var __ = require('lodash');
 
@@ -18,7 +18,7 @@ var EditableSelectField = React.createClass({
     },
 
     save: function save() {
-        this.props.onUpdate(this.props.name, this.refs.input.getValue());
+        this.props.onUpdate(this.props.name, this.refs.input.value);
         this.refs.overlay.hide();
     },
 
@@ -46,6 +46,7 @@ var EditableSelectField = React.createClass({
         var linkClass = empty ? 'editable-click editable-empty' : 'editable-click';
         var defaultValue = __.find(this.props.options, function(o) { return o.id == linkText; }) || {value: 'Empty'};
         linkText = defaultValue.value;
+
         var popover = React.createElement(
             Popover,
             { id: 'xeditable_select_popover' },
@@ -53,8 +54,8 @@ var EditableSelectField = React.createClass({
                 'form',
                 { className: '', onSubmit: this.submit },
                 React.createElement(
-                    Input,
-                    { type: 'select', id: 'xeditable_select', ref: 'input', placeholder: 'Select', className: 'input-md', defaultValue: this.props.value},
+                    'select',
+                    { type: 'select', style: {padding: 10, marginBottom: 10}, id: 'xeditable_select', ref: 'input', placeholder: 'Select', className: 'input-md', defaultValue: this.props.value},
                     this.renderOptions(this.props.options)
                 ),
                 React.createElement(
